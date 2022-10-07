@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/zidane-arkan/ServerNode/issues"
   },
-  "homepage": "https://github.com/zidane-arkan/ServerNode#readme"
+  "homepage": "https://github.com/zidane-arkan/ServerNode#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
