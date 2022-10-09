@@ -2,7 +2,10 @@ const express = require('express');
 
 //Express App
 const app = express();
-let path = './views';
+// let path = './views';
+
+//Register View Engine
+app.set('view engine','ejs');
 
 //Listen For Request
 app.listen(3000);
