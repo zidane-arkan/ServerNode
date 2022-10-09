@@ -1,63 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Blog Daniz | <%= title %>
-    </title>
-</head>
+<%- include('./partials/head.ejs') %> 
 
-<% const name="Daniz" %>
-
-    <body>
-        <header class="w-full flex align-center p-10 border-[3px]">
-            <nav class="w-full flex flex-row gap-8 justify-between">
-                <section class="flex flex-row gap-4">
-                    <a href="/">
-                        <h1>Blog Daniz</h1>
-                    </a>
-                    <p>Net <%= name %> Sites</p>
-                </section>
-                <ul class="flex flex-row gap-4">
-                    <li>
-                        <a href="/">Blogs</a>
-                    </li>
-                    <li>
-                        <a href="/about">About</a>
-                    </li>
-                    <li>
-                        <a href="/blogs/create">New Blog</a>
-                    </li>
-                </ul>
-                <section class="flex flex-row gap-4">
-                    <a href="/">
-                        <h1>Welcome to My Blog</h1>
-                    </a>
-
-                </section>
-            </nav>
-        </header>
-        <main>
-            <section class="w-full flex flex-col gap-8 p-8">
-                <h2>All Blogs</h2>
-                <section class="flex flex-col gap-6 p-8">
-                    <% for(let blogs of blogData){ %>
-                        <div class="flex flex-col gap-2">
-                            <h3 class="text-[1.5rem]">
-                                <%= blogs.title%>
-                            </h3>
-                            <p class="text-[1rem]">
-                                <%= blogs.content%>
-                            </p>
-                        </div>
-                    <% } %>
-                </section>
+<body>
+    <header class="w-full flex align-center px-10 pt-10 pb-8 border-[3px]">
+        <%- include('./partials/navbar.ejs')  %>     
+    </header>
+    <main>
+        <section class="w-full flex flex-col gap-8 p-10">
+            <h2 class="text-[2rem] font-[600] pl-2">All Blogs</h2>
+            <section class="flex flex-col gap-6 p-8 h-[65vh]">
+                <% for(let blogs of blogData){ %>
+                    <div class="flex flex-col gap-2">
+                        <h3 class="text-[1.5rem] font-[500]">
+                            <%= blogs.title%>
+                        </h3>
+                        <p class="text-[1rem]">
+                            <%= blogs.content%>
+                        </p>
+                    </div>
+                <% } %>
+                <% if(blogData.length <= 0){ %>
+                    <h3 class="text-[1.5rem]">There Is No Blogs</h3>
+                <% } %>
             </section>
-        </main>
-        <footer></footer>
-    </body>
+        </section>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+</body>
 
 </html>
