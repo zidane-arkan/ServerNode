@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Blog Daniz</title>
+</head>
+
+<body>
+    <header class="w-full flex align-center p-10 border-[3px]">
+        <nav class="w-full flex flex-row gap-8 justify-between">
+            <section class="flex flex-row gap-4">
+                <a href="/">
+                    <h1>Blog Daniz</h1>
+                </a>
+                <p>Net Daniz Sites</p>
+            </section>
+            <ul class="flex flex-row gap-4">
+                <li>
+                    <a href="/">Blogs</a>
+                </li>
+                <li>
+                    <a href="/about">About</a>
+                </li>
+                <li>
+                    <a href="/blogs/create">New Blog</a>
+                </li>
+            </ul>
+            <section class="flex flex-row gap-4">
+                <a href="/">
+                    <h1>Welcome to My Blog</h1>
+                </a>
+            </section>
+        </nav>
+    </header>
+    <main>
+        <section class="p-8">
+            <form class="flex flex-col gap-4">
+                <label for="title">Blog title:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="snippet">Blog snippet:</label>
+                <input type="text" id="snippet" name="snippet" required>
+                <label for="body">Blog body:</label>
+                <textarea id="body" name="body" required></textarea>
+                <button>Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+
+</html>
