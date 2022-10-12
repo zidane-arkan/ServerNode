@@ -6,7 +6,7 @@ const Blog = require('./models/blog');
 const app = express();
 
 //Connect to Mongo Db Atlas
-const dbURI = 'mongodb://admin:1234@ac-geelcqo-shard-00-00.eumshzl.mongodb.net:27017,ac-geelcqo-shard-00-01.eumshzl.mongodb.net:27017,ac-geelcqo-shard-00-02.eumshzl.mongodb.net:27017/?ssl=true&replicaSet=atlas-4i5mwg-shard-0&authSource=admin&retryWrites=true&w=majority';
+const dbURI = 'mongodb://admin:1234@ac-geelcqo-shard-00-00.eumshzl.mongodb.net:27017,ac-geelcqo-shard-00-01.eumshzl.mongodb.net:27017,ac-geelcqo-shard-00-02.eumshzl.mongodb.net:27017/blog-tuts?ssl=true&replicaSet=atlas-4i5mwg-shard-0&authSource=admin&retryWrites=true&w=majority';
 mongoose
     .connect(dbURI, {
         useUnifiedTopology: true,
@@ -52,7 +52,7 @@ app.get('/about', (req, res) => {
 
 //Blog Routes
 app.get('/blogs', (req, res) => {
-    Blog.find().sort({createdAt: -1})
+    Blog.find().sort({ createdAt: -1 })
         .then((result) => {
             res.render('index', { title: 'Home', blogData: result });
         })
@@ -62,6 +62,17 @@ app.get('/blogs', (req, res) => {
 });
 
 app.get('/blogs/create', (req, res) => {
+    // const blogData = new Blog({
+    //     title: 'New Tragedy In Indonesia Football',
+    //     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur. ',
+    //     bodyContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    // });
+    // blogData
+    //     .save()
+    //     .then((result) => {
+    //         res.send(result);
+    //     })
+    //     .catch(err => res.send(err));
     res.render('create', { title: "Create New Blog" });
 });
 
