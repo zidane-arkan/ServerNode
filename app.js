@@ -31,6 +31,7 @@ app.set('view engine', 'ejs');
 
 //Middleware & Static Files
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 //Routes
@@ -59,6 +60,14 @@ app.get('/blogs', (req, res) => {
         .catch((err) => {
             res.send(err);
         });
+});
+
+app.post('/blogs', (req, res) => {
+    const blog = new Blog(req.body);
+    blog
+        .save()
+        .then((result) => res.redirect('/blogs'))
+        .catch(err => res.send(err));
 });
 
 app.get('/blogs/create', (req, res) => {
