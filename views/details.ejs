@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <header class="w-full flex align-center px-10 pt-10 pb-8 border-[3px]">
+            <%- include('./partials/navbar.ejs') %>
+        </header>
+        <main>
+            <section class="w-full flex flex-col gap-8 p-10">
+                <h2 class="text-[2rem] font-[600] pl-2">Blogs</h2>
+                <section class="flex flex-col gap-6 p-8 2xl:h-[65vh]">
+                    <div class="flex flex-col gap-8">
+                        <a href="/blogs/<%= blog.id %>">
+                            <h3 class="text-[1.5rem] font-[500]">
+                                <%= blog.title%>
+                            </h3>
+                        </a>
+                        <p class="text-[1rem]">
+                            <%= blog.content%>
+                        </p>
+                        <a data-doc="<%= blog.id %>"
+                            class="delete hover:bg-sky-200 cursor-pointer w-[20%] 2xl:w-[10%] text-center border-solid py-4 border-[2px] border-[#000] rounded-md text-[1.2rem] font-[500]">
+                            Delete
+                        </a>
+                </section>
+            </section>
+        </main>
+        <%- include('./partials/footer.ejs') %>
+        <script>
+            const trash = document.querySelector('a.delete');
+            trash.addEventListener('click', (e) => {
+                const endpoint = `/blogs/${trash.dataset.doc}`;
+                fetch(endpoint, {
+                    method: 'DELETE'
+                })
+                    .then((res) => res.json())
+                    .then((data) => location.href = data.redirect)
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            })
+        </script>
+    </body>
+
+</html>

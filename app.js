@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const Blog = require('./models/blog');
+const blogsRoute = require('./routes/blogsRoute');
+
 //Express App
 const app = express();
 
@@ -21,14 +22,6 @@ mongoose
 app.set('view engine', 'ejs');
 
 //Listen For Request
-// app.use((req,res,next) => {
-//     console.log('New Request Made');
-//     console.log('Host :',req.hostname);
-//     console.log('Path: ', req.path);
-//     console.log('Method: ', req.method);
-//     next();
-// });
-
 //Middleware & Static Files
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +29,23 @@ app.use(morgan('dev'));
 
 //Routes
 app.get('/', (req, res) => {
+    res.redirect('/blogs');
+});
+
+app.get('/about', (req, res) => {
+    res.render('about', { title: 'About' });
+});
+
+app.use('/blogs', blogsRoute);
+
+//404 Page
+app.use((req, res) => {
+    res.status(404).render('404', { title: 'Not Found Page' });
+});
+
+
+
+// app.get('/', (req, res) => {
     // const blogData = [
     //     { title: 'Lupa sunat saat makan', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
     //     { title: 'Meninjau proses minum', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
@@ -44,56 +54,13 @@ app.get('/', (req, res) => {
     //Menggantikan res.setHeader
     // res.sendFile(`./views/index.ejs`, { root: __dirname });
     // res.render('index', { title: 'Home', blogData });
-    res.redirect('/blogs');
-});
-
-app.get('/about', (req, res) => {
-    res.render('about', { title: 'About' });
-});
-
-//Blog Routes
-app.get('/blogs', (req, res) => {
-    Blog.find().sort({ createdAt: -1 })
-        .then((result) => {
-            res.render('index', { title: 'Home', blogData: result });
-        })
-        .catch((err) => {
-            res.send(err);
-        });
-});
-
-app.post('/blogs', (req, res) => {
-    const blog = new Blog(req.body);
-    blog
-        .save()
-        .then((result) => res.redirect('/blogs'))
-        .catch(err => res.send(err));
-});
-
-app.get('/blogs/create', (req, res) => {
-    // const blogData = new Blog({
-    //     title: 'New Tragedy In Indonesia Football',
-    //     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur. ',
-    //     bodyContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    // });
-    // blogData
-    //     .save()
-    //     .then((result) => {
-    //         res.send(result);
-    //     })
-    //     .catch(err => res.send(err));
-    res.render('create', { title: "Create New Blog" });
-});
-
-//Redirecting
+//     res.redirect('/blogs');
+// });
+// //Redirecting
 // app.get('/about-us', (req, res) => {
 //     res.redirect('/about');
 // });
 
-//404 Page
-app.use((req, res) => {
-    res.status(404).render('404');
-});
 
 //Mongoose and Mongo Sandbox Routes
 //Save Data to Db
@@ -134,3 +101,17 @@ app.use((req, res) => {
 //         });
 // });
 
+// app.get('/blogs/create', (req, res) => {
+//     res.render('create', { title: "Create New Blog" });
+    // const blogData = new Blog({
+    //     title: 'New Tragedy In Indonesia Football',
+    //     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur. ',
+    //     bodyContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    // });
+    // blogData
+    //     .save()
+    //     .then((result) => {
+    //         res.send(result);
+    //     })
+    //     .catch(err => res.send(err));
+// });

@@ -10,19 +10,21 @@
     <main>
         <section class="w-full flex flex-col gap-8 p-10">
             <h2 class="text-[2rem] font-[600] pl-2">All Blogs</h2>
-            <section class="flex flex-col gap-6 p-8 h-[65vh]">
+            <section class="flex flex-col gap-6 p-8 2xl:h-[65vh]">
+                <% if(blogData.length <=0){ %>
+                    <h3 class="text-[1.5rem]">There Is No Blogs</h3>
+                <% } %>
                 <% for(let blogs of blogData){ %>
                     <div class="flex flex-col gap-2">
-                        <h3 class="text-[1.5rem] font-[500]">
-                            <%= blogs.title%>
-                        </h3>
+                        <a href="/blogs/<%= blogs.id %>">
+                            <h3 class="text-[1.5rem] font-[500]">
+                                <%= blogs.title%>
+                            </h3>
+                        </a>
                         <p class="text-[1rem]">
                             <%= blogs.content%>
                         </p>
                     </div>
-                <% } %>
-                <% if(blogData.length <= 0){ %>
-                    <h3 class="text-[1.5rem]">There Is No Blogs</h3>
                 <% } %>
             </section>
         </section>
