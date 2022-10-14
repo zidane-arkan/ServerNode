@@ -14,13 +14,13 @@ const blog_detail = (req, res) => {
     const id = req.params.id;
     Blog.findById(id)
         .then((result) => {
-            res.render('details', { blog: result, title: 'Detail Blog' });
+            res.render('blogs/details', { blog: result, title: 'Detail Blog' });
         })
         .catch((err) => { res.send(err); });
 };
 
 const blog_create_get = (req, res) => {
-    res.render('create', { title: "Create New Blog" });
+    res.render('blogs/create', { title: "Create New Blog" });
 };
 const blog_create_post = (req, res) => {
     const blog = new Blog(req.body);

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('./partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
     <body>
         <header class="w-full flex align-center px-10 pt-10 pb-8 border-[3px]">
-            <%- include('./partials/navbar.ejs') %>
+            <%- include('../partials/navbar.ejs') %>
         </header>
         <main>
             <section class="w-full flex flex-col gap-8 p-10">
@@ -27,7 +27,7 @@
                 </section>
             </section>
         </main>
-        <%- include('./partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>
         <script>
             const trash = document.querySelector('a.delete');
             trash.addEventListener('click', (e) => {
